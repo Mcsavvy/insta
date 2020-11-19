@@ -34,17 +34,15 @@ class Insta:
             'slime',
             'beautiful mess',
             u'Charmed😌']
-    
-    
-    def settings(self):
-        global session
-        session = InstaPy(
+    session = InstaPy(
                 username=self.username,
                 password=self.password,
                 headless_browser=self.headless)
-        
-        session.login()
-        session.set_quota_supervisor(
+    
+    
+    def settings(self):
+        self.session.login()
+        self.session.set_quota_supervisor(
                 enabled=True,
                 sleep_after=[
                     "likes_d",
@@ -65,7 +63,7 @@ class Insta:
                 peak_unfollows_daily=1440,
                 peak_server_calls_hourly=None,
                 peak_server_calls_daily=None)
-        session.set_skip_users(
+        self.session.set_skip_users(
                 skip_private=True,
                 private_percentage=100,
                 skip_no_profile_pic=True,
@@ -73,15 +71,15 @@ class Insta:
                 skip_business=False,
                 skip_non_business=False,
                 business_percentage=100)
-        session.set_delimit_liking(
+        self.session.set_delimit_liking(
                 enabled=True,
                 max_likes=None,
                 min_likes=10)
-        session.set_delimit_commenting(
+        self.session.set_delimit_commenting(
                 enabled=True,
                 max_comments=None,
                 min_comments=2)
-        session.set_relationship_bounds(
+        self.session.set_relationship_bounds(
                 enabled=True,
                 potency_ratio=1.5,
                 delimit_by_numbers=True,
@@ -91,36 +89,36 @@ class Insta:
                 min_following=None,
                 min_posts=5,
                 max_posts=None)
-        session.set_action_delays(
+        self.session.set_action_delays(
                 enabled=True,
                 like=2,
                 comment=2,
                 follow=5,
                 unfollow=5,
                 story=5)
-        session.set_mandatory_language(
+        self.session.set_mandatory_language(
                 enabled=True, 
                 character_set=['LATIN'])
             
     def follow(self):
-        session.set_comments(
+        self.session.set_comments(
             self.pic_comments,
             media='Photo')
-        session.set_comments(
+        self.session.set_comments(
             self.vid_comments,
             media='Video')
-        session.set_do_comment(
+        self.session.set_do_comment(
             enabled=True,
             percentage=50)
-        session.set_do_follow(
+        self.session.set_do_follow(
             enabled=True,
             percentage=100,
             times=1)
-        session.set_user_interact(
+        self.session.set_user_interact(
             amount=5,
             randomize=False,
             percentage=100)
-        session.follow_likers(
+        self.session.follow_likers(
             ['wizkid' , 'davido', 'burnaboygram', 'selenagomez', 'iamcardib',
              'kimkardashian', 'thedrake', 'kingjames', 'kevinhart4real', 'therock'], 
             photos_grab_amount = 2, 
@@ -130,18 +128,19 @@ class Insta:
             interact=True)
         
     def gain(self):
-        session.follow_user_following(
+        self.session.follow_user_following(
             ['selenagomez', 'iamcardib', 'kimkardashian', 'thedrake', 'kingjames', 'kevinhart4real', 'therock'], 
             amount=20, 
             randomize=True)
         
         
     def unfollow(self):
-        nonfollowers = session.pick_nonfollowers(
+        nonfollowers=self.session.grab_following(
             username="dave.x_x", 
+            amount="full", 
             live_match=False, 
             store_locally=False)
-        session.unfollow_users( 
+        self.session.unfollow_users( 
             custom_list_enabled=True, 
             custom_list=nonfollowers,
             custom_list_param="all", 
@@ -149,34 +148,34 @@ class Insta:
             sleep_delay=60)
             
     def scroll(self):
-        session.set_do_comment(
+        self.session.set_do_comment(
                 enabled=True,
                 percentage=50)
-        session.set_comments(
+        self.session.set_comments(
                 self.pic_comments,
                 media='Photo')
-        session.set_user_interact(
+        self.session.set_user_interact(
                 amount=3,
                 randomize=True,
                 percentage=50)
-        session.like_by_feed(
+        self.session.like_by_feed(
             amount=100, 
             randomize=True, 
             unfollow=True, 
             interact=True)
         
     def stories(self):
-        following = session.grab_following(
+        following = self.session.grab_following(
             username="dave.x_x", 
             amount="full", 
             live_match=True, 
             store_locally=False)
-        session.set_do_story(
+        self.session.set_do_story(
             enabled = True, 
             percentage = 70, 
             simulate = True)
-        session.interact_by_users(following, amount=0, randomize=True, media='Photo')
+        self.session.interact_by_users(following, amount=0, randomize=True, media='Photo')
 
         
     def end(self):
-        session.end()
+        self.session.end()
