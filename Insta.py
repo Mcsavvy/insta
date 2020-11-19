@@ -41,7 +41,7 @@ class Insta:
     
     
     
-    def settings(self):
+    def boot(self):
         self.session.login()
         self.session.set_quota_supervisor(
                 enabled=True,
