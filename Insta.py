@@ -3,7 +3,7 @@ from instapy import InstaPy
 from instapy import smart_run
 
 class Insta:
-    def __init__(self, username='dave.x_x', password='hood@ins.com', headless=True):
+    def __init__(self, username='dave.x_x', password='', headless=True):
         self.session = InstaPy(
                 username=username,
                 password=password,
@@ -128,7 +128,7 @@ class Insta:
             interact=True)
         
     def gain(self):
-        self.ssession.follow_by_list(
+        self.session.follow_by_list(
             self.top, 
             times=1, 
             sleep_delay=20, 
