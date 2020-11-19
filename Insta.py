@@ -38,7 +38,7 @@ class Insta:
             'slime',
             'beautiful mess',
             u'Charmed😌']
-    
+    top = ['tyga', 'kendalljenner', 'camila_cabello', 'porsha4real', 'evamarcille', 'chythegreatest', 'youngmoney', 'jheneaiko', 'badbunnypr', 'charliesangelll', '_excuse_my_beauty', 'milliebobbybrown', 'khloe.sassy', 'offsetyrn', 'queennaija', 'stormalooo', 'chrisappleton1', 'stormijenwebster', 'ciara', 'kendall.glow', 'kylies.beauty', 'marns', 'stormiplanet', 'kyliekbomb', 'niallhoran', 'ester_exposito', 'ariianabutera', 'taylorswift', 'niki', 'thegrandeheels', 'joeyking', 'graandeuniverse', 'hashtagarig', 'arianagranderarest', 'dovecameron', 'ariana.bvtera', 'thebigguyryback22', 'sonypictures', 'romanreignscom', 'chrishemsworthly', 'neymarjr', 'chrishemsworthaustralia', 'instagrambodybuilding', 'virat.kohli', 'gym_ability', 'jacquelinef143', 'sharah_ulisses', 'the.rock.worldstar', 'blacchyna', 'burnaboythegenre', 'baddyoosha', 'audiomackafrica', 'heisremanewss', 'sydneytalker', 'zionayo', 'annieidibia1', 'nancyisimeofficial', 'iamvjadams', 'symplysimi', 'iammayorkun', 'official2baba', 'donjazzy', 'peruzzinews', 'incrediblenoble', 'seunpizzle_', 'tundetdot', 'pizzle_luxury', 'thedorathybachor', 'cdqolowo', 'patorankingfire', 'offlcial_lyta']
     
     
     def boot(self):
@@ -120,19 +120,47 @@ class Insta:
             randomize=False,
             percentage=100)
         self.session.follow_likers(
-            ['wizkid' , 'davido', 'burnaboygram', 'selenagomez', 'iamcardib',
-             'kimkardashian', 'thedrake', 'kingjames', 'kevinhart4real', 'therock'], 
-            photos_grab_amount = 2, 
+            self.top, 
+            photos_grab_amount = 5, 
             follow_likers_per_photo = 5, 
             randomize=True, 
             sleep_delay=60, 
             interact=True)
         
     def gain(self):
-        self.session.follow_user_following(
-            ['selenagomez', 'iamcardib', 'kimkardashian', 'thedrake', 'kingjames', 'kevinhart4real', 'therock'], 
-            amount=20, 
-            randomize=True)
+        self.ssession.follow_by_list(
+            self.top, 
+            times=1, 
+            sleep_delay=20, 
+            interact=False)
+        
+    def ungain(self):
+        self.session.unfollow_users(
+            amount=80, 
+            custom_list_enabled=True, 
+            custom_list=self.top, 
+            custom_list_param="all", 
+            style="RANDOM", 
+            unfollow_after=5*60*60, 
+            sleep_delay=20)
+        
+    def instagram(self):
+        self.session.set_do_comment(
+            enabled=True,
+            percentage=50)
+        self.session.set_comments(
+            self.pic_comments,
+            media='Photo')
+        self.session.set_user_interact(
+            amount=5, 
+            randomize=True, 
+            percentage=50, 
+            media='Photo')
+        self.session.follow_user_followers(
+            ['instagram'], 
+            amount=10, 
+            randomize=True, 
+            interact=True)
         
         
     def unfollow(self):
@@ -144,7 +172,7 @@ class Insta:
         self.session.unfollow_users( 
             custom_list_enabled=True, 
             custom_list=nonfollowers,
-            custom_list_param="all", 
+            custom_list_param="nonfollowers", 
             style="RANDOM", 
             sleep_delay=60)
             
@@ -180,3 +208,4 @@ class Insta:
         
     def end(self):
         self.session.end()
+#Everyday:ungain, follow, scroll, instagram, stories, unfollow, gain
