@@ -4,6 +4,10 @@ from instapy import smart_run
 
 class Insta:
     def __init__(self, username='dave.x_x', password='hood@ins.com', headless=True):
+        self.session = InstaPy(
+                username=username,
+                password=password,
+                headless_browser=headless)
         self.username=username
         self.password=password
         self.headless=headless
@@ -34,10 +38,7 @@ class Insta:
             'slime',
             'beautiful mess',
             u'Charmed😌']
-    session = InstaPy(
-                username=self.username,
-                password=self.password,
-                headless_browser=self.headless)
+    
     
     
     def settings(self):
